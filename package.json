@@ -1,6 +1,6 @@
 {
-  "name": "@steelunion/dsh-relay",
-  "version": "0.6.0",
+  "name": "@steelunion/dsh-softsensor-hub",
+  "version": "0.6.1",
   "description": "Smart butler framework for DeepSeek Harness: event model (shell+payload), hot-reload rule engine, storageDomain-backed event store, and pluggable collectors (system / mail / weather / finance). Runs entirely in-process, so no external daemon can silently die. Ships a guided setup wizard, config dual-write with drift detection, and a weather query CLI. Read-only by design.",
   "keywords": [
     "deepseek-harness",
@@ -83,12 +83,12 @@
   },
   "license": "MIT",
   "author": "SteelUnion",
-  "homepage": "https://github.com/SteelUnion/dsh-relay#readme",
+  "homepage": "https://github.com/SteelUnion/dsh-softsensor-hub#readme",
   "bugs": {
-    "url": "https://github.com/SteelUnion/dsh-relay/issues"
+    "url": "https://github.com/SteelUnion/dsh-softsensor-hub/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SteelUnion/dsh-relay.git"
+    "url": "git+https://github.com/SteelUnion/dsh-softsensor-hub.git"
   }
 }

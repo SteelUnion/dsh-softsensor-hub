@@ -1,4 +1,4 @@
-// relay 打包脚本 —— 按白名单，输出 dist/dsh-relay-v<version>.zip
+// relay 打包脚本 —— 按白名单，输出 dist/dsh-softsensor-hub-v<version>.zip
 //
 // 借鉴 confirm-gate/pack.mjs：
 //   白名单顺序固定（顺序影响哈希，固定才能复现），不允许通配。
@@ -92,7 +92,7 @@ if (typeof version !== 'string' || version.trim() === '') {
   process.exit(1);
 }
 
-const name = `dsh-relay-v${version}.zip`;
+const name = `dsh-softsensor-hub-v${version}.zip`;
 const outPath = join(DIST, name);
 
 // ---- 最小 zip 写入器（deflate，无第三方依赖）----
