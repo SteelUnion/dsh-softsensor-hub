@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://steelunion.local/schema/rules.schema.json",
+  "title": "智能管家 叫醒规则清单",
+  "description": "决定哪些事件叫醒用户、哪些只进窗口。改本文件即改行为，热加载，不需要重启。",
+  "type": "object",
+  "required": ["rules"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "_说明": { "type": "string" },
+
+    "defaults": {
+      "type": "object",
+      "description": "没有规则匹配时怎么办。默认只进窗口。",
+      "additionalProperties": false,
+      "properties": {
+        "_说明": { "type": "string" },
+        "channels": { "$ref": "#/definitions/channelList" }
+      }
+    },
+
+    "rules": {
+      "type": "array",
+      "description": "按顺序匹配，第一条命中即生效。",
+      "items": { "$ref": "#/definitions/rule" }
+    }
+  },
+
+  "definitions": {
+    "channelList": {
+      "type": "array",
+      "items": { "enum": ["window", "wake", "batch", "archive"] },
+      "uniqueItems": true
+    },
+
+    "rule": {
+      "type": "object",
+      "required": ["id", "match", "channels"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$",
+          "description": "规则唯一标识"
+        },
+        "_说明": { "type": "string" },
+
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "false 时不参与匹配，但保留在清单里"
+        },
+
+        "match": {
+          "type": "object",
+          "description": "全部条件为 AND；数组值是 OR。省略某字段 = 不限。",
+          "additionalProperties": false,
+          "properties": {
+            "source": {
+              "oneOf": [
+                { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,31}$" },
+                { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,31}$" }, "minItems": 1 }
+              ],
+              "description": "源标识，如 mail / finance / system"
+            },
+            "kind": {
+              "oneOf": [
+                { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,31}$" },
+                { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,31}$" }, "minItems": 1 }
+              ]
+            },
+            "level": {
+              "oneOf": [
+                { "enum": ["info", "warn", "critical"] },
+                { "type": "array", "items": { "enum": ["info", "warn", "critical"] }, "minItems": 1 }
+              ]
+            },
+            "summaryContains": {
+              "type": "string",
+              "description": "摘要里包含这个词才匹配（区分大小写）"
+            },
+            "summaryMatches": {
+              "type": "string",
+              "description": "摘要正则。加载时校验，非法正则 → 整份清单拒载并保留旧版"
+            }
+          }
+        },
+
+        "channels": { "$ref": "#/definitions/channelList" },
+
+        "wake": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cooldownSec": { "type": "integer", "minimum": 0, "default": 300 },
+            "exemptGameMode": {
+              "type": "boolean",
+              "default": false,
+              "description": "true 表示游戏模式下仍然叫醒"
+            }
+          }
+        },
+
+        "batch": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maxItems":   { "type": "integer", "minimum": 1, "default": 5 },
+            "maxWaitSec": { "type": "integer", "minimum": 1, "default": 300 }
+          }
+        },
+
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "period": { "enum": ["hourly", "daily", "weekly"] },
+            "at":     { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" }
+          }
+        },
+
+        "quietHours": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start": { "type": "integer", "minimum": 0, "maximum": 23 },
+            "end":   { "type": "integer", "minimum": 0, "maximum": 23 }
+          },
+          "description": "该规则在此时段内不叫醒（跨午夜如 23→7 允许）"
+        }
+      }
+    }
+  }
+}

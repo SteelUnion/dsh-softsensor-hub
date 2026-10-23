@@ -1,0 +1,10 @@
+# 消息中枢默认挂载配置
+#
+# 中枢的全部行为都由 config.json 与 peers/ 决定，
+# 这里只放最小的一组默认值。
+
+- insert:
+    - id: relay
+      name: '@steelunion/dsh-relay'
+      config:
+        enabled: true
