@@ -12,7 +12,7 @@
 插件是**一个目录**，解压即可用。所有文件按相对位置互相找到，**不依赖任何绝对路径**。
 
 ```
-dsh-relay\
+dsh-softsensor-hub\
 ├── package.json            代码清单
 ├── LICENSE
 ├── README.md               功能说明
@@ -250,4 +250,4 @@ node test/zz-all.mjs
 
 ## 八、版本
 
-当前 `0.6.0`。查新版：`init.checkGitHub` 为 true 时，每天首次启动查一次 GitHub Releases（查不到就静默，不阻塞）。
+当前 `0.6.1`。查新版：`init.checkGitHub` 为 true 时，每天首次启动查一次 GitHub Releases（查不到就静默，不阻塞）。

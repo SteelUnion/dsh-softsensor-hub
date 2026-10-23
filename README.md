@@ -1,8 +1,8 @@
-# dsh-relay
+# dsh-softsensor-hub
 
 消息中枢。收消息、判轻重、告诉 agent。它自己不动手。
 
-版本 0.6.0。测试 793 项，全过。
+版本 0.6.1。测试 793 项，全过。
 
 ---
 
@@ -48,7 +48,7 @@ DSH 里有很多东西想通知你：系统告警、邮件、行情、天气。
 安装目录就是数据目录。卸载前记得备份整个目录。
 
 ```
-dsh-relay\
+dsh-softsensor-hub\
 ├── config.json          你的配置
 ├── logs\                所有日志
 ├── inbox\  archive\     消息队列

@@ -5,6 +5,6 @@
 
 - insert:
     - id: relay
-      name: '@steelunion/dsh-relay'
+      name: '@steelunion/dsh-softsensor-hub'
       config:
         enabled: true
