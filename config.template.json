@@ -1,0 +1,104 @@
+{
+  "_说明": "relay 配置模板。首次启动时若同目录没有 config.json，会复制本文件生成一份。值为 null 的键 = 尚未配置，由向导逐项处理，或由你手工填写。",
+  "_版本": "0.6.0",
+
+  "enabled": true,
+
+  "_root说明": "数据目录。null = 用插件安装目录本身（解压即可用，所有文件彼此找得到）。要集中数据到别处，填绝对路径。",
+  "root": null,
+
+  "delivery": {
+    "levels": {
+      "critical": { "channel": "wake", "cooldownSec": 300, "mergeWindowSec": 300, "titleChars": 20, "batch": { "enabled": false } },
+      "warn": { "channel": "queue", "cooldownSec": 0, "mergeWindowSec": 0, "titleChars": 20, "batch": { "enabled": true, "maxItems": 5, "maxWaitSec": 300 } },
+      "info": { "channel": "archive", "cooldownSec": 0, "mergeWindowSec": 0, "titleChars": 20, "batch": { "enabled": false } }
+    }
+  },
+
+  "rate": { "maxPerTurn": 2, "maxPerHour": 5, "globalCooldownSec": 30 },
+
+  "quietHours": { "enabled": false, "start": 23, "end": 7 },
+
+  "supervise": { "enabled": true },
+
+  "gameMode": {
+    "enabled": true,
+    "flagFile": "game-mode.on",
+    "autoExpireSec": 21600,
+    "_说明": "标记文件存在时压制 warn 与 info，critical 照常"
+  },
+
+  "interface": {
+    "file": { "enabled": true, "dir": "inbox", "pollMs": 10000 },
+    "http": { "enabled": false, "host": "127.0.0.1", "port": 17831, "path": "/inbox" }
+  },
+
+  "retention": { "days": 30 },
+
+  "sources": {
+    "_说明": "采集源。每个源可单独开关；null 值表示需要你指定。",
+
+    "system": {
+      "enabled": true,
+      "intervalSec": 60,
+      "memoryPercent": 90,
+      "memoryCriticalPercent": 95,
+      "diskPercent": 90,
+      "diskCriticalPercent": 95,
+      "eventLoopMs": 500,
+      "failThreshold": 3,
+      "hysteresisPercent": 3,
+      "_diskPath说明": "要盯哪个盘。null = 自动取用户目录所在卷",
+      "diskPath": null
+    },
+
+    "monitor": {
+      "enabled": false,
+      "_说明": "外部 monitor 进程的采集文件。只用内置 system 采集时可保持关闭。",
+      "mode": "external",
+      "pidFile": null,
+      "metricsFile": null
+    },
+
+    "mail": {
+      "enabled": false,
+      "_说明": "邮箱采集。boxes 里每一项需要一个凭据名（不是密码本身）。凭据从环境变量或 vault.json 取。",
+      "_示例": { "boxes": [{ "address": "you@example.com", "credential": "relay-qq-mail" }] },
+      "boxes": []
+    },
+
+    "finance": {
+      "enabled": false,
+      "_dbPath说明": "量化库文件路径（SQLite）。null = 未配置，采集器静默跳过，不产任何事件。",
+      "dbPath": null,
+      "codes": [],
+      "at": "09:00",
+      "intervalSec": 1800,
+      "maxAgeDays": 7,
+      "barsPerCode": 300,
+      "level": "info",
+      "failThreshold": 3
+    },
+
+    "weather": {
+      "enabled": true,
+      "locations": [],
+      "_locations说明": "城市列表，第一个为主城市。留空则走 IP 定位（geoIp）。",
+      "geoIp": true,
+      "fallbackCity": null,
+      "refreshHours": 6,
+      "keepDays": 10,
+      "thresholds": { "warnC": 5, "criticalC": 8 },
+      "dailyLevel": "info",
+      "intervalSec": 900,
+      "failThreshold": 3
+    }
+  },
+
+  "init": {
+    "checkGitHub": true,
+    "wakeOnIncomplete": false,
+    "_wakeOnIncomplete说明": "false = 配置未完成也不叫醒，只留 info。要它主动催就设 true。",
+    "hintPath": null
+  }
+}

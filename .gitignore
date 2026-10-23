@@ -1,0 +1,30 @@
+# Runtime data — created on first run, never published
+config.json
+vault.json
+logs/
+inbox/
+archive/
+peers/
+data/
+dist/
+game-mode.on
+*.jsonl
+*.jsonl.tmp
+
+# Test artifacts
+test/.zz-*
+test/*.tmp
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Backups
+*.bak-*
+*.bak

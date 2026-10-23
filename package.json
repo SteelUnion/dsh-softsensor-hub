@@ -1,0 +1,94 @@
+{
+  "name": "@steelunion/dsh-relay",
+  "version": "0.6.0",
+  "description": "Smart butler framework for DeepSeek Harness: event model (shell+payload), hot-reload rule engine, storageDomain-backed event store, and pluggable collectors (system / mail / weather / finance). Runs entirely in-process, so no external daemon can silently die. Ships a guided setup wizard, config dual-write with drift detection, and a weather query CLI. Read-only by design.",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "relay",
+    "butler",
+    "collector",
+    "monitor",
+    "inbox",
+    "notification",
+    "message-bus",
+    "agent",
+    "supervisor"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "schema",
+    "test/zz-all.mjs",
+    "test/zz-check.mjs",
+    "test/zz-e2e.mjs",
+    "test/zz-steer-test.mjs",
+    "test/zz-batch-test.mjs",
+    "test/zz-event-test.mjs",
+    "test/zz-rules-test.mjs",
+    "test/zz-store-test.mjs",
+    "test/zz-collector-test.mjs",
+    "test/zz-system-test.mjs",
+    "test/zz-hysteresis-test.mjs",
+    "test/zz-cred-test.mjs",
+    "test/zz-mail-test.mjs",
+    "test/zz-finance-test.mjs",
+    "test/zz-weather-test.mjs",
+    "test/zz-weather-query-test.mjs",
+    "test/zz-init-test.mjs",
+    "test/zz-config-sync-test.mjs",
+    "test/zz-mail-e2e.mjs",
+    "test/zz-mail-live.mjs",
+    "test/wiring.mjs",
+    "test/inject.mjs",
+    "test/integration.mjs",
+    "test/relay-flow.mjs",
+    "test/supervise.mjs",
+    "test/zz-http-live.cjs",
+    "relay.mjs",
+    "pack.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {},
+  "scripts": {
+    "test": "node test/zz-all.mjs",
+    "check": "node test/zz-check.mjs",
+    "http:live": "node test/zz-http-live.cjs",
+    "pack": "node pack.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.2",
+    "@deepseek-ai/dsh-agent-loop": ">=0.2.0-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-agent-loop": {
+      "optional": true
+    }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "author": "SteelUnion",
+  "homepage": "https://github.com/SteelUnion/dsh-relay#readme",
+  "bugs": {
+    "url": "https://github.com/SteelUnion/dsh-relay/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteelUnion/dsh-relay.git"
+  }
+}
