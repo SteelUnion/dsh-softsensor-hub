@@ -1,5 +1,10 @@
 # dsh-softsensor-hub
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Tests](https://img.shields.io/badge/tests-793%20passed-brightgreen)
+![DSH](https://img.shields.io/badge/dsh-%E2%89%A50.2.0--rc.1-orange)
+![Version](https://img.shields.io/badge/version-0.6.2-lightgrey)
+
 > **让 AI 助手知道你的电脑出事了、来邮件了、该看行情了。**
 >
 > 它统一收各类通知，判断该不该吵醒 AI —— 急事立刻叫，一般的事攒一批，
@@ -11,6 +16,27 @@
 消息中枢。收消息、判轻重、告诉 agent。它自己不动手。
 
 版本 0.6.2。测试 793 项，全过。
+
+---
+
+## 它怎么判轻重
+
+```
+采集器产出事件（磁盘、内存、邮件、行情、天气）
+        ↓
+按规则定级
+        ↓
+critical ──→ 立刻叫醒 AI
+warn     ──→ 攒一批，凑够再叫
+info     ──→ 只留档，不打扰
+        ↓
+存进事件库（可回溯、可查询）
+```
+
+**关键点：它不产生动作，只产生「该不该说」的判断。**
+真正做什么由 AI 决定 —— 这样换模型、换策略都不用改这个插件。
+
+---
 
 ---
 
