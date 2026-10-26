@@ -20,9 +20,14 @@ function ok(name, cond, extra) {
   else { fail++; console.log(`FAIL  ${name}${extra ? ' — ' + extra : ''}`); }
 }
 
+// 真实信箱地址从环境变量取，**不写进源码**（公开仓库）。
 const boxes = [];
-if (process.env.DSH_RELAY_QQ_MAIL) boxes.push({ address: '********@qq.com', credential: 'relay-qq-mail' });
-if (process.env.DSH_RELAY_163_MAIL) boxes.push({ address: '********@163.com', credential: 'relay-163-mail' });
+if (process.env.DSH_RELAY_QQ_MAIL && process.env.DSH_RELAY_QQ_ADDRESS) {
+  boxes.push({ address: process.env.DSH_RELAY_QQ_ADDRESS, credential: 'relay-qq-mail' });
+}
+if (process.env.DSH_RELAY_163_MAIL && process.env.DSH_RELAY_163_ADDRESS) {
+  boxes.push({ address: process.env.DSH_RELAY_163_ADDRESS, credential: 'relay-163-mail' });
+}
 
 if (boxes.length === 0) {
   console.log('跳过：没有设置 DSH_RELAY_QQ_MAIL / DSH_RELAY_163_MAIL');

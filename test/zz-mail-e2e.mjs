@@ -26,9 +26,17 @@ mkdirSync(join(root, 'inbox'), { recursive: true });
 mkdirSync(join(root, 'archive'), { recursive: true });
 mkdirSync(join(root, 'peers'), { recursive: true });
 
+// 真实信箱地址从环境变量取，**不写进源码**。
+// 这个仓库是公开的：写死的地址等于把账号贴到 GitHub 上。
+// 变量名沿用 DSH_RELAY_QQ_MAIL / DSH_RELAY_163_MAIL 作为「要不要跑这一路」的开关，
+// 地址本身另用 DSH_RELAY_QQ_ADDRESS / DSH_RELAY_163_ADDRESS 给出。
 const boxes = [];
-if (process.env.DSH_RELAY_QQ_MAIL) boxes.push({ address: '********@qq.com', credential: 'relay-qq-mail' });
-if (process.env.DSH_RELAY_163_MAIL) boxes.push({ address: '********@163.com', credential: 'relay-163-mail' });
+if (process.env.DSH_RELAY_QQ_MAIL && process.env.DSH_RELAY_QQ_ADDRESS) {
+  boxes.push({ address: process.env.DSH_RELAY_QQ_ADDRESS, credential: 'relay-qq-mail' });
+}
+if (process.env.DSH_RELAY_163_MAIL && process.env.DSH_RELAY_163_ADDRESS) {
+  boxes.push({ address: process.env.DSH_RELAY_163_ADDRESS, credential: 'relay-163-mail' });
+}
 
 writeFileSync(join(root, 'config.json'), JSON.stringify({
   enabled: true,
