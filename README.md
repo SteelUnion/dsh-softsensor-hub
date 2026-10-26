@@ -1,8 +1,38 @@
 # dsh-softsensor-hub
 
+> **让 AI 助手知道你的电脑出事了、来邮件了、该看行情了。**
+>
+> 它统一收各类通知，判断该不该吵醒 AI —— 急事立刻叫，一般的事攒一批，
+> 不重要的只留档。**它自己不动手，只负责"告诉"。**
+>
+> *Gives your AI agent a sense of the outside world — system alerts, mail, markets,
+> weather — and decides what is worth waking it for.*
+
 消息中枢。收消息、判轻重、告诉 agent。它自己不动手。
 
-版本 0.6.1。测试 793 项，全过。
+版本 0.6.2。测试 793 项，全过。
+
+---
+
+## 三十秒上手
+
+```powershell
+npx -p @deepseek-ai/dsh dsh plugin --profile web add github:SteelUnion/dsh-softsensor-hub
+```
+
+装完重启 DSH。首次启动会从 `config.template.json` 复制一份 `config.json`，
+所有 `null` 都是待填项，旁边有 `_xxx说明` 提示。然后跑一次配置向导。
+
+---
+
+## 它替你省什么
+
+| 场景 | 没有它 | 有它 |
+|---|---|---|
+| 磁盘满了 / 内存告警 | AI 不知道，继续干活 | 主动告诉 AI，让它先收手 |
+| 来了重要邮件 | 你得自己去翻 | AI 收到摘要，能替你判断 |
+| 行情异动 | 你盯着屏幕 | 达到条件才通知，不刷屏 |
+| 一堆无关通知 | 全推给 AI，污染上下文 | **分级过滤，只把该说的说出去** |
 
 ---
 
