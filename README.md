@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Tests](https://img.shields.io/badge/tests-793%20passed-brightgreen)
 ![DSH](https://img.shields.io/badge/dsh-%E2%89%A50.2.0--rc.1-orange)
-![Version](https://img.shields.io/badge/version-0.6.2-lightgrey)
+![Version](https://img.shields.io/badge/version-0.6.3-lightgrey)
 
 > **让 AI 助手知道你的电脑出事了、来邮件了、该看行情了。**
 >
@@ -15,7 +15,12 @@
 
 消息中枢。收消息、判轻重、告诉 agent。它自己不动手。
 
-版本 0.6.2。测试 793 项，全过。
+版本 0.6.3。测试 799 项，除 10 项需邮件凭据的端到端外全部通过。
+
+## 0.6.3 更新了什么
+
+插件行为没有变化。这次只补了开源清单要的三个仓库文件：`SECURITY.md`、Dependabot 配置、
+`package-lock.json`。代码没动。
 
 ---
 
