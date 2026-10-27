@@ -27,6 +27,7 @@
   },
   "files": [
     "lib",
+    "!lib/**/*.bak-*",
     "schema",
     "test/zz-all.mjs",
     "test/zz-check.mjs",
